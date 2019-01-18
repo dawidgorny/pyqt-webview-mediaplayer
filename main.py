@@ -22,7 +22,6 @@ class MediaPlayerBridge(QObject):
   
   @pyqtSlot()
   def playStop(self):
-      print("playStop")
       if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
           self.mediaPlayer.pause()
       else:
@@ -127,7 +126,10 @@ class App(QWidget):
 
     # Create Web View
     self.webView = QtWebEngineWidgets.QWebEngineView()
+    # self.webView.setWindowFlags(Qt.FramelessWindowHint)
+    # self.webView.setAttribute(Qt.WA_TranslucentBackground, True)
     self.page = WebRTCPageView()
+    self.page.setBackgroundColor(Qt.transparent)
     self.page.objects = {"mediaPlayerBridge": self.mediaPlayerBridge}
     self.page.profile().clearHttpCache()
     self.webView.setPage(self.page)
