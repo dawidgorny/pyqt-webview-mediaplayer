@@ -27,7 +27,6 @@ class MediaPlayerBridge(QObject):
       else:
           self.mediaPlayer.play()
 
-
 class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
     def __init__(self, *args, **kwargs):
         super(WebEnginePage, self).__init__(*args, **kwargs)
@@ -113,6 +112,8 @@ class App(QWidget):
 
     # Create video widget
     self.videoWidget = QVideoWidget()
+    self.videoWidget.aspectRatioMode = Qt.KeepAspectRatio
+    self.videoWidget.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
     self.videoWidget.setMinimumSize(320, 320)
     # Create Media player
     self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
@@ -126,6 +127,7 @@ class App(QWidget):
 
     # Create Web View
     self.webView = QtWebEngineWidgets.QWebEngineView()
+    self.webView.setContextMenuPolicy(Qt.PreventContextMenu) # TODO: test NoContextMenu
     # self.webView.setWindowFlags(Qt.FramelessWindowHint)
     # self.webView.setAttribute(Qt.WA_TranslucentBackground, True)
     self.page = WebRTCPageView()
