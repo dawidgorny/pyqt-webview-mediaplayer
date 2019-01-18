@@ -49,6 +49,48 @@ class WebPage(QWebEnginePage):
 https://riverbankcomputing.com/pipermail/pyqt/2015-August/036346.html
 
 
+## 
 
+Transparent layer on top of video
+https://stackoverflow.com/questions/16889319/put-transparent-qwidget-on-top-of-qmediaview-in-qt5-on-ubuntu
 
+nie działa:
+```
+
+    wg = QWidget()
+    wg.setMinimumSize(200, 200)
+    # wg.setLayout(layout)
+
+    item = QGraphicsVideoItem()
+    item.setSize(QSizeF(self.videoWidget.size()))
+    scene = QGraphicsScene(0, 0, self.videoWidget.size().width(), self.videoWidget.size().height())
+    self.videoWidget.setScene(scene)
+    self.videoWidget.scene().addItem(item)
+
+    self.videoWidget.setParent(self)
+    # wg.setParent(self)
+    # self.webView.setParent(self)
+    # self.webView.setMinimumSize(320, 320)
+    self.webView.setMinimumSize(200, 200)
+    # self.webView.resize(self.width, self.width)
+    # self.videoWidget.stackUnder(self.webView)
+
+    # self.webView.setParent(wg)
+
+    wg.setParent(self)
+    self.videoWidget.stackUnder(wg)
+    self.webView.setParent(wg)
+    wg.show()
+
+    
+
+    self.resize(640, 800)
+    self.show()
+    
+
+    self.mediaPlayer.setVideoOutput(item)
+
+    self.videoWidget.show()
+    self.mediaPlayer.play()
+    ```
 
