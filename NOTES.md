@@ -94,3 +94,7 @@ nie działa:
     self.mediaPlayer.play()
     ```
 
+
+## Disable context menu
+
+https://www.qtcentre.org/threads/65427-How-to-disable-right-click-on-web-page
